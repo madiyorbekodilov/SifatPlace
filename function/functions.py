@@ -66,3 +66,17 @@ async def delete_user(user_id: int, db):
     db.commit()
     return True
 
+async def check_user(number: int, password: str, db):
+    db_user = db.query(User).filter(User.number == number).first()
+    if db_user is None:
+        raise HTTPException(status_code=404, detail='Number or password do not match')
+
+    if verify_password(password, db_user.password) is False:
+        raise HTTPException(status_code=401, detail='Password does not match')
+
+    return UserResult(
+        name=db_user.name,
+        email=db_user.email,
+        number=db_user.number,
+        brith_day=db_user.brith_day
+    )
