@@ -180,3 +180,31 @@ def total_endpoints(app):
             "statusCode": 200,
             "data": response
         }
+
+    # Comment
+    @app.post("/create/comment")
+    async def create_comment(comment: CommentCreate, db: Session = Depends(get_db)):
+        response = await comment_create(comment,db)
+        return {
+            "message": "comment successfully created",
+            "statusCode": 200,
+            "data": response
+        }
+
+    @app.put("/update/comment")
+    async def update_comment(comment: CommentUpdate, db: Session = Depends(get_db)):
+        response = await comment_update(comment,db)
+        return {
+            "message": "comment successfully updated",
+            "statusCode": 200,
+            "data": response
+        }
+
+    @app.delete("/delete/comment/{id}")
+    async def delete_comment(comment_id: int, db: Session = Depends(get_db)):
+        response = await comment_delete(comment_id,db)
+        return {
+            "message": "comment successfully deleted",
+            "statusCode": 200,
+            "data": response
+        }
