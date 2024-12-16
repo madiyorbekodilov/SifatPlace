@@ -106,3 +106,40 @@ def total_endpoints(app):
             "statusCode": 200,
             "data": response
         }
+
+    # Subcategory
+    @app.post("/create/subcategory")
+    async def subcategory_create(subcategory: SubcategoryCreate, db: Session = Depends(get_db)):
+        response = await create_subcategory(subcategory,db)
+        return {
+            "message": "subcategory successfully created",
+            "statusCode": 200,
+            "data": response
+        }
+
+    @app.put("/update/subcategory")
+    async def subcategory_update(subcategory: SubcategoryUpdate, db: Session = Depends(get_db)):
+        response = await update_subcategory(subcategory,db)
+        return {
+            "message": "subcategory successfully updated",
+            "statusCode": 200,
+            "data": response
+        }
+
+    @app.delete("/delete/subcategory/{id}")
+    async def subcategory_delete(subcategory_id: int, db: Session = Depends(get_db)):
+        response = await delete_category(subcategory_id,db)
+        return {
+            "message": "subcategory successfully deleted",
+            "statusCode": 200,
+            "data": response
+        }
+
+    @app.get("/get/subcategory/{id}")
+    async def subcategory_get(subcategory_id: int, db: Session = Depends(get_db)):
+        response = await get_subcategories(subcategory_id,db)
+        return {
+            "message": "subcategory successfully retrieved",
+            "statusCode": 200,
+            "data": response
+        }
