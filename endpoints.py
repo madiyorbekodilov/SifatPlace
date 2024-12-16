@@ -208,3 +208,31 @@ def total_endpoints(app):
             "statusCode": 200,
             "data": response
         }
+
+    # Location
+    @app.post("/create/location")
+    async def create_location(location: LocationCreate, db: Session = Depends(get_db)):
+        response = await location_create(location,db)
+        return {
+            "message": "location successfully created",
+            "statusCode": 200,
+            "data": response
+        }
+
+    @app.put("/update/location")
+    async def update_location(location: LocationUpdate, db: Session = Depends(get_db)):
+        response = await location_update(location,db)
+        return {
+            "message": "location successfully updated",
+            "statusCode": 200,
+            "data": response
+        }
+
+    @app.delete("/delete/location/{id}")
+    async def delete_location(location_id: int, db: Session = Depends(get_db)):
+        response = await location_delete(location_id,db)
+        return {
+            "message": "location successfully deleted",
+            "statusCode": 200,
+            "data": response
+        }
