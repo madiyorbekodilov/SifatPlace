@@ -60,3 +60,31 @@ def total_endpoints(app):
             "statusCode": 200,
             "data": response
         }
+
+    # Category
+    @app.post("/create/category")
+    async def category_create(category: CategoryCreate, db: Session = Depends(get_db)):
+        response = await create_category(category,db)
+        return {
+            "message": "category successfully created",
+            "statusCode": 200,
+            "data": response
+        }
+
+    @app.put("/update/category")
+    async def category_update(category: CategoryUpdate, db: Session = Depends(get_db)):
+        response = await update_category(category,db)
+        return {
+            "message": "category successfully updated",
+            "statusCode": 200,
+            "data": response
+        }
+
+    @app.delete("/delete/category/{id}")
+    async def category_delete(category_id: int, db: Session = Depends(get_db)):
+        response = await delete_category(category_id,db)
+        return {
+            "message": "category successfully deleted",
+            "statusCode": 200,
+            "data": response
+        }
