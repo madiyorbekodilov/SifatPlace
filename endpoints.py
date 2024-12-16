@@ -143,3 +143,40 @@ def total_endpoints(app):
             "statusCode": 200,
             "data": response
         }
+
+    # Product
+    @app.post("/create/product")
+    async def product_create(product: ProductCreate, db: Session = Depends(get_db)):
+        response = await create_product(product,db)
+        return {
+            "message": "product successfully created",
+            "statusCode": 200,
+            "data": response
+        }
+
+    @app.put("/update/product")
+    async def product_update(product: ProductUpdate, db: Session = Depends(get_db)):
+        response = await update_product(product,db)
+        return {
+            "message": "product successfully updated",
+            "statusCode": 200,
+            "data": response
+        }
+
+    @app.delete("/delete/product/{id}")
+    async def product_delete(product_id: int, db: Session = Depends(get_db)):
+        response = await delete_product(product_id,db)
+        return {
+            "message": "product successfully deleted",
+            "statusCode": 200,
+            "data": response
+        }
+
+    @app.get("/get/product/{id}")
+    async def product_get(product_id: int, db: Session = Depends(get_db)):
+        response = await get_product(product_id,db)
+        return {
+            "message": "product successfully retrieved",
+            "statusCode": 200,
+            "data": response
+        }
