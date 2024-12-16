@@ -33,3 +33,30 @@ def total_endpoints(app):
             "statusCode": 200,
             "data": response
             }
+
+    @app.put("/update/user/{id}")
+    async def user_update(user: UserUpdate, db: Session = Depends(get_db)):
+        response = await update_user(user,db)
+        return {
+            "message": "user successfully updated",
+            "statusCode": 200,
+            "data": response
+        }
+
+    @app.delete("/delete/user/{id}")
+    async def user_delete(user_id: int, db: Session = Depends(get_db)):
+        response = await delete_user(user_id,db)
+        return {
+            "message": "user successfully deleted",
+            "statusCode": 200,
+            "data": response
+        }
+
+    @app.get("/get/user/{id}")
+    async def user_get(user_id: int, db: Session = Depends(get_db)):
+        response = await get_user_by_id(user_id,db)
+        return {
+            "message": "user successfully retrieved",
+            "statusCode": 200,
+            "data": response
+        }
