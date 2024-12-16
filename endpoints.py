@@ -88,3 +88,21 @@ def total_endpoints(app):
             "statusCode": 200,
             "data": response
         }
+
+    @app.get("/get/category/{id}")
+    async def category_get(category_id: int, db: Session = Depends(get_db)):
+        response = await get_category(category_id,db)
+        return {
+            "message": "category successfully retrieved",
+            "statusCode": 200,
+            "data": response
+        }
+
+    @app.get("/get-all/category")
+    async def category_get_all(db: Session = Depends(get_db)):
+        response = await get_all_categories(db)
+        return {
+            "message": "category successfully retrieved",
+            "statusCode": 200,
+            "data": response
+        }
