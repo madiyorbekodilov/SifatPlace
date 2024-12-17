@@ -1,8 +1,8 @@
-from sqlalchemy import create_engine, Column, Integer, String, DATE, JSON, ForeignKey, Boolean, DATETIME, Float
+from sqlalchemy import create_engine, Column, Integer, String, DATE, JSON, ForeignKey, Boolean, DATETIME, Float, TIMESTAMP
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker, relationship, Relationship
 
-SQLALCHEMY_DATABASE_URL = "postgresql://postgres:194853@localhost:5432/SifatTest"
+SQLALCHEMY_DATABASE_URL = "postgresql://postgres.meelgtyqemxqvaijoupe:T5db3E4ALkRVBh8J@aws-0-eu-central-1.pooler.supabase.com:6543/postgres"
 
 engine = create_engine(SQLALCHEMY_DATABASE_URL)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
@@ -64,7 +64,7 @@ class Comment(Base):
     id = Column(Integer, primary_key=True)
     writer_name = Column(String)
     star = Column(Integer)
-    date = Column(DATETIME)
+    date = Column(TIMESTAMP)
     like = Column(Integer)
     unlike = Column(Integer)
 
