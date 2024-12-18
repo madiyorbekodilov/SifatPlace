@@ -25,6 +25,16 @@ def total_endpoints(app):
         return {"message": f"Hello {name}"}
 
     # User
+    @app.get("/check/user")
+    async def user_check(number: int, password: str):
+        response = await user_check(number, password)
+        return {
+            "message": "successfully",
+            "statusCode": 200,
+            "data": response,
+        }
+
+
     @app.post("/create/user")
     async def user_create(user: UserCreate, db: Session = Depends(get_db)):
         response = await create_user(user,db)
