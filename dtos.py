@@ -83,8 +83,8 @@ class CommentCreate(BaseModel):
 class CommentUpdate(BaseModel):
     id: int
     star: int
-    like = int
-    unlike = int
+    like: int
+    unlike: int
 
 class CommentResult(BaseModel):
     writer_name: str
